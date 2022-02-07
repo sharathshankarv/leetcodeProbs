@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Integer to Roam</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+
+        const rom = {'M':1000,'D':500,'C':100,'L':50,'X':10,'V':5,'I':1,};
+
+        const intToRoman = function(nums){
+            let i = 0; roman = '';
+            for ( i in rom ) {
+                debugger
+                while ( nums >= rom[i] ) {
+                    debugger;
+                roman += i;
+                nums -= rom[i];
+                }
+            }
+            return roman;
+        }
+
+        console.log(intToRoman(4324));
+    </script>
+</head>
+<body>
+<!-- methods: 
+        find difference(if diff is )
+     -->
+</body>
+</html>
