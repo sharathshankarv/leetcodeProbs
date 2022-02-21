@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Linked List Implementation</title>
+</head>
+<body>
+    <script>
+        class Node{
+            constructor(data){
+                this.data = data;
+                this.next = null
+            }   
+        };
+
+        class LinkedList{
+            constructor(){
+                this.head = null;
+                this.size = 0;
+            }
+
+            removeLopp = () => {
+                let slow = this.head, fast = this.head;
+                while(slow && fast){
+                    slow = slow.next;
+                    fast = fast.next.next;
+                    if(slow.next.next === fast.next.next){
+                        slow.next.next = null;
+                        return true;
+                    }
+                }
+
+            }
+
+            add = (val) => {
+                let newNode = new Node(val);
+                if(this.head === null){
+                    this.head = newNode;
+                    this.size++;
+                }else{
+                    let curr = this.head;
+
+                    while(curr.next){
+                        curr = curr.next;
+                    }
+
+                    curr.next = newNode;
+                    this.size++;
+                }
+            }
+
+            inserAt = (val, index) => {
+
+                if(index < 0 ){
+                    console.log("Invalid index")
+                }else{
+                    let newNode = new Node(val);
+
+                    if(index === 0){
+                        newNode.next = this.head;
+                        this.head = newNode;
+                    }else{
+                        let f = 0;
+                        let curr = this.head, prev;
+
+                        while(f < index){
+                            f++;
+                            prev = curr;
+                            curr = curr.next
+                        }
+
+                        newNode.next = curr;
+                        prev.next = newNode
+
+                    }   
+                    this.size++;
+                }
+            }
+
+            removeFromIndex = (index) => {
+                if(index > this.size+1){
+                    return "invalid index";
+                }else{
+                    let curr = this.head, prev = null, i = 0;
+                    if(index === 0){
+                        this.head = curr.next;
+                    }else{
+                        while(i < index){
+                            i++;
+                            prev = curr;
+                            curr = curr.next
+                        }
+                        prev.next = curr.next;
+
+                    }
+                    this.size--;
+                    return curr.data;
+                }
+            }
+
+            removeElement = (val) => {
+                let curr = this.head;
+                let prev = null;
+                while(curr){
+                    if(curr.data === val){
+                        if(prev === null){                            
+                            this.head = curr.next
+                        }else{
+                            prev.next = curr.next;
+                        }
+                        this.size--;
+                        return curr.data;
+                    }
+
+                    prev = curr;
+                    curr = curr.next;
+                }
+                return -1;
+
+            }
+
+            findMiddleOfListUsingMid = () => {
+                let curr = this.head;
+                let mid = Math.floor(this.size/2), i = 0;
+                while(curr){
+                    if(i === mid){
+                        return curr.data;
+                    }
+                    curr = curr.next;
+                    i++;
+                }        
+                
+            }
+
+            findMiddleOfList = () => {
+                let curr = this.head, fPointer = this.head;
+                if(curr !== null){
+                    if(curr.next === null) return curr.data
+
+                    if(curr.next.next === null) {
+                        return curr.next.data;
+                    }else{
+                        while(fPointer.next !== null){
+                            fPointer = fPointer.next.next
+                            curr = curr.next;
+                        }
+
+                        return curr.data
+                    }                
+                }else{
+                    return "No List"
+                }
+            }
+
+            //helpers
+            size = () => {
+                console.log(this.size);
+            }
+
+            printList = () => {
+                let curr = this.head;
+                while(curr.next){
+                    console.log('\n',curr.data);
+                    curr= curr.next;
+                }
+
+                console.log('\n',curr.data);
+            }
+
+            isEmpty = () => {
+                let msg = 'List is ';
+                console.log(this.size === 0 ? `${msg}empty` : `${msg}not empty`)
+            }
+            
+            createloop = () => {
+                let curr = this.head;
+                let loopingNode = curr.next.next;
+                while(curr.next !== null){
+                    curr = curr.next
+                }
+                curr.next = loopingNode;
+            }
+
+        }
+        
+
+        let l = new LinkedList();
+        l.add(1);
+        l.add(2);
+        l.add(3);
+        l.add(4);
+        l.add(5);
+        l.printList();
+        l.createloop();
+        l.removeLopp();
+        l.printList();
+        // l.add(6);
+        // l.add(-6);
+        // l.add(6);
+        // l.add(8);
+        // l.add(4);
+        // l.add(-12);
+        // l.add(9);
+        // l.add(8);
+        // l.add(-8);
+        // console.log(l.findMiddleOfList())
+
+        // l.add(1);
+        // l.add(2);
+        // l.add(3);
+        // l.add(4);
+        // l.add(5);
+        // l.add(6);
+        // l.printList();
+        // console.log(l.findMiddleOfList());
+        // l.isEmpty();
+        // l.printList();
+        // l.inserAt(4,3);
+        
+        // console.log(l.removeFromIndex(2));        
+        // console.log(l.removeElement(4));
+    </script>
+</body>
+</html>

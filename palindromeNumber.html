@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An integer is a palindrome when it reads the same backward as forward.</title>
+</head>
+<body>
+    <script>
+        const isPalindrome = function(x) {
+            let c = ""+x;
+            let s = 0, e = c.length-1;
+            if(e > 0){
+                while(c[s] === c[e]){
+                    if(s>=e){
+                        return true
+                    }
+                    s++;
+                    e--;
+                }   
+            }else{
+                return true
+            }
+            return false;
+            
+        };
+
+        console.log(isPalindrome(12));
+
+    </script>
+</body>
+</html>
