@@ -5,6 +5,22 @@
     <title>Linked List Implementation</title>
 </head>
 <body>
+
+    <h2>Features in this lisnked list programs</h2>
+    <ul>
+        <li>add</li>
+        <li>insert at</li>
+        <li>remove loop</li>
+        <li>remove at index</li>
+        <li>remoev node</li>
+        <li>find Middle Of List Using Mid</li>
+        <li>Find midddle using fast and slow pointer</li>
+        <li>print list </li>
+        <li>is empty</li>
+        <li>create loop</li>
+        <li>findIntersection</li>
+        <li>reverse list</li>
+    </ul>
     <script>
         class Node{
             constructor(data){
@@ -30,6 +46,38 @@
                     }
                 }
 
+            }
+
+            reverseListUsingStack = () => {
+                let stack = [];
+                let curr = this.head;
+                while(curr){
+                    stack.push(curr);
+                    curr = curr.next;
+                }
+                this.head = stack.pop();
+                let cur = this.head;
+                while(stack.length){
+                    let n = stack.pop();
+                    n.next = null;
+                    cur.next = n;
+                    cur = cur.next;
+                }
+                cur.next = null;
+
+            }
+
+            reverseList = () => {
+                let prev = null, next = null, curr = this.head;
+
+                while(curr){
+                    debugger;
+                    next = curr.next;
+                    prev = curr;
+                    curr.next = null;
+                    curr = next;
+                }
+                this.head = prev;
             }
 
             add = (val) => {
@@ -152,13 +200,15 @@
                 }
             }
 
-            //helpers
+            //helpers            
+
             size = () => {
                 console.log(this.size);
             }
 
             printList = () => {
                 let curr = this.head;
+                debugger;
                 while(curr.next){
                     console.log('\n',curr.data);
                     curr= curr.next;
@@ -181,7 +231,69 @@
                 curr.next = loopingNode;
             }
 
+            
+
         }
+
+        
+
+        let head1 = null, head2 = null;
+
+        head1 = new Node(3);
+        head1.next = new Node(6);
+        head1.next.next = new Node(9);
+        head1.next.next.next = new Node(15);
+        head1.next.next.next.next = new Node(30);
+ 
+        // creating second linked list
+        head2 = new Node(10);
+        head2.next = new Node(15);
+        head2.next.next = new Node(30);
+
+        getCount = (node) => {
+                let curr = node, count = 0;
+                while(curr !== null){
+                    count++;
+                    curr = curr.next;
+                }
+                return count;
+            }
+            getIntersectionPoint = (d, list1, list2) => {
+                let i= 0;
+                let curr1 = list1;
+                let curr2 = list2;
+
+                for(i = 0; i < d; i++){
+                    curr1 = curr1.next;
+                }
+
+                while(curr1.next && curr2.next){
+                    if(curr1.data === curr2.data){
+                        return curr1.data
+                    }
+
+                    curr1 = curr1.next;
+                    curr2 = curr2.next;
+                }
+
+                return -1;
+            }
+
+        findIntersection = () => {
+            let c1 = getCount(head1);
+            let c2 = getCount(head2);
+
+                if(c1 > c2){
+                    let dif = c1 - c2;
+                    return getIntersectionPoint(dif, head1, head2);
+                }else{
+                    let dif = c2 - c1;
+                    return getIntersectionPoint(dif, head2, head1);
+                }
+                
+            }
+
+        // console.log(findIntersection());
         
 
         let l = new LinkedList();
@@ -191,9 +303,11 @@
         l.add(4);
         l.add(5);
         l.printList();
-        l.createloop();
-        l.removeLopp();
+        l.reverseList();
         l.printList();
+        // l.createloop();
+        // l.removeLopp();
+        // l.printList();
         // l.add(6);
         // l.add(-6);
         // l.add(6);
